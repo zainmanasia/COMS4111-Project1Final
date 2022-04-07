@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Tutoring Service Management System</title>
+    <meta name="description" content="A description of your website">
+    <meta name="keywords" content="keyword1, keyword2, keyword3">
+    <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+
+    <div id="wrapper">
+
+        <div id="header">
+
+            <div class="top_banner">
+                <h1>Tutoring Service Management System</h1>
+            </div>
+
+        </div>
+
+        <div id="page_content">
+
+            <div class="left_side_bar">
+
+                <div class="col_1">
+                    <div class="box">
+                        <ul>
+                            <li><a href="/">Home</a></li>
+                            <li><a href="/client">Client</a></li>
+                            <li><a href="/tutor">Tutor</a></li>
+                            <li><a href="/supervisor">Supervisor</a></li>
+                            <li><a href="/appointments">Appointments</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="right_section">
+                <div class="common_content">
+                    <h2>Tutor Search</h2>
+                    <hr>
+                    <form accept-charset="UTF-8" action="/search_clients" autocomplete="off" method="POST"
+                        target="_blank">
+                        <fieldset>
+                            <legend>Search for Tutors:</legend> 
+                            <label for="c_gender">Client Gender : </label><input name="c_gender" type="text"value="" /> <br />
+                            <label for="c_location">Client Location : </label> <input name="c_location"type="text" value="" /> <br />
+                            <label for="c_daysavailable">Client Day Available : </label> <input name="c_daysavailable"type="text" value="" /> <br />
+                            <label for="c_timesavailable">Client Time Available : </label> <input name="c_timesavailable"type="text" value="" /> <br />
+                            <label for="c_genderpreference">Preferred Gender : </label> <input name="c_genderpreference"type="text" value="" /> <br />
+                            <label for="c_inpersonpreference">Preferred Teaching Medium : </label> <input name="c_inpersonpreference"type="text" value="" /> <br />
+                            <label for="c_vaxstatuspreference">Preferred Vaccination Status : </label> <input name="c_vaxstatuspreference"type="text" value="" /> <br />
+                            <input type="submit" value="Search" onclick="loading();">
+                        </fieldset>
+                    </form>
+                    
+                    <div class="common_content">
+                        <h2>Clients View</h2>
+                        <hr>
+                        {% for item in apt%}
+                        <table class="base_qry_render">
+                            <thead>
+                                <tr>
+                                    <th>Property</th>
+                                    <th>Value</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                        {% for key, value in item.items() %}
+                                            <tr>
+                                                <td>{{key}}</td>
+                                                <td>{{value}}</td>
+                                            </tr>
+                                        {% endfor %}
+                            </tbody>
+                        </table>
+                        <br />
+                        {% endfor %}
+                </div>
+
+            <div class="clear"></div>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>
