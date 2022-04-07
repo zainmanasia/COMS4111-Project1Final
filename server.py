@@ -21,7 +21,7 @@ import application.supervisor
 with open(conf_dir + '/configuration.json') as f:
   config = json.load(f)
 
-DATABASEURI = "postgresql://" + config['user'] + ":" + config['passphrase'] + "@35.211.155.104 /project1" 
+DATABASEURI = "postgresql://" + config['user'] + ":" + config['passphrase'] + "@35.211.155.104/project1" 
 
 engine = create_engine(DATABASEURI)
 
