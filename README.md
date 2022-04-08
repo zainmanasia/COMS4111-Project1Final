@@ -2,9 +2,7 @@
 Mohiuddin Alamgir mma 2204 <br/>
  Zain Manasia zm2401
   
-   Postgres Server Details:
-    username: zm2401
-      password: 3459
+  
       
        The parts that were implemented in this project were a system to query all the clients and their prefereneces present in the database, all the tutors present in the database, the supervisor and information on the tutors associated with a specific supervisor, and a way to query for all the appointments associated with either an appointment ID, client ID, or tutor ID. This aligns with what we had proposed in Part I, and we were able to implement all of the features we had hoped for. This website serves as a management system for existing client, tutors, and supervisors, so the functionality on that front was covered. 
         
