@@ -50,15 +50,15 @@ def index():
 def appointments_render():
   return render_template("appointments.html")
 
-@app.route("appointments/search_appointments", methods=["POST"])
+@app.route("/search_appointments", methods=["POST"])
 def search_appointments():
   rows = ["Date", "Time", "Duration", "Tutor Name", "Tutor ID", "Client Name", "Client ID"]
   cursor = g.conn.execute(query)
   result = []
   for c in cursor:
     result.append(dict(zip(rows, c)))
-  return render_template("appointments.html", **dict(apt = result))
-
+  #return render_template("appointments.html", **dict(apt = result))
+  return redirect("/appointments", **dict(apt = result))
 @app.route("/client/", methods=["GET"])
 def appointments_render():
   return render_template("client.html")
