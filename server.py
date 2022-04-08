@@ -32,7 +32,7 @@ def before_request():
     g.conn = engine.connect()
     logging.debug("In-flight request: Connection established!")
   except:
-    logging.ERROR("In-flight request: Error connectiong to database!")
+    logging.ERROR("In-flight request: Error connecting to database!")
     import traceback; traceback.print_exc()
     g.conn = None
 
