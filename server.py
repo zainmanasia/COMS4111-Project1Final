@@ -50,7 +50,7 @@ def index():
 def appointments_render():
   return render_template("appointments.html")
 
-@app.route("/search_appointments", methods=["POST"])
+@app.route("appointments/search_appointments", methods=["POST"])
 def search_appointments():
   rows = ["Date", "Time", "Duration", "Tutor Name", "Tutor ID", "Client Name", "Client ID"]
   cursor = g.conn.execute(query)
