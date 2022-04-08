@@ -1,43 +1,41 @@
-import os, sys
+import os
 from sqlalchemy import *
 from sqlalchemy.pool import NullPool
 from flask import Flask, request, render_template, g, redirect, Response
-import json
-import logging
-
 
 tmpl_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates')
-conf_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'conf')
 app = Flask(__name__, template_folder=tmpl_dir)
-sys.path.insert(1, os.path.join(os.path.dirname(os.path.abspath(__file__)), 'app'))
-import application.tutor
-import application.client
-import application.appointments
-import application.supervisor
 
 
+DATABASEURI = "postgresql://zm2401:2459@35.211.155.104/proj1part2"
 
-# Import login details from configuration file.
-with open(conf_dir + '/configuration.json') as f:
-  config = json.load(f)
 
-DATABASEURI = "postgresql://" + config['user'] + ":" + config['passphrase'] + "@35.211.155.104/proj1part2" 
-
+#
+# This line creates a database engine that knows how to connect to the URI above.
+#
 engine = create_engine(DATABASEURI)
 
 @app.before_request
 def before_request():
+  """
+  This function is run at the beginning of every web request 
+  (every time you enter an address in the web browser).
+  We use it to setup a database connection that can be used throughout the request.
+  The variable g is globally accessible.
+  """
   try:
-    logging.debug("In-flight request: Attempting to establish connection to DB")
     g.conn = engine.connect()
-    logging.debug("In-flight request: Connection established!")
   except:
-    logging.ERROR("In-flight request: Error connecting to database!")
+    print "uh oh, problem connecting to database"
     import traceback; traceback.print_exc()
     g.conn = None
 
 @app.teardown_request
 def teardown_request(exception):
+  """
+  At the end of the web request, this makes sure to close the database connection.
+  If you don't, the database could run out of memory!
+  """
   try:
     g.conn.close()
   except Exception as e:
