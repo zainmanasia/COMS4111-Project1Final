@@ -59,6 +59,7 @@ def search_appointments():
     result.append(dict(zip(rows, c)))
   #return render_template("appointments.html", **dict(apt = result))
   return redirect("/appointments", **dict(apt = result))
+
 @app.route("/client/", methods=["GET"])
 def appointments_render():
   return render_template("client.html")
@@ -70,10 +71,10 @@ def search_tutors():
   result = []
   for c in cursor:
     result.append(dict(zip(rows, c)))
-  return render_template("client.html", **dict(apt = result))
+  return redirect("/client", **dict(apt = result))
 
 @app.route("/tutor/", methods=["GET"])
-def appointments_render():
+def tutor_render():
   return render_template("tutor.html")
 
 @app.route("/search_clients", methods=["POST"])
@@ -83,10 +84,10 @@ def search_clients():
   result = []
   for c in cursor:
     result.append(dict(zip(rows, c)))
-  return render_template("tutor.html", **dict(apt = result))
+  return redirect("/client", **dict(apt = result))
 
 @app.route("/supervisor/", methods=["GET"])
-def appointments_render():
+def supervisor_render():
   return render_template("supervisor.html")
 
 @app.route("/search_supervisorinfo", methods=["POST"])
@@ -96,7 +97,7 @@ def search_supervisorinfo():
   result = []
   for c in cursor:
     result.append(dict(zip(rows, c)))
-  return render_template("supervisor.html", **dict(apt = result))
+  return redirect("/supervisor", **dict(apt = result))
 
 @app.route('/login')
 def login():
